@@ -1,6 +1,7 @@
 //hi:)
 var formEl = document.querySelector("#task-form");
 var tasksToDoEl = document.querySelector("#tasks-to-do");
+var taskIdCounter = 0;
 
 var taskFormHandler = function(event) {
     event.preventDefault(); //4.2.5 tells browser to not to refresh/default browser behavior (and keep remainder in text box)
@@ -35,6 +36,9 @@ var createTaskEl = function(taskDataObj) {
     var listItemEl = document.createElement("li");
     listItemEl.className = "task-item";
 
+    //add task id as a custom attribute 4.3.5
+    listItemEl.setAttribute("data-task-id", taskIdCounter);
+
     // create div to hold task info and add to list item
     var taskInfoEl = document.createElement("div");
     taskInfoEl.className = "task-info";
@@ -43,8 +47,6 @@ var createTaskEl = function(taskDataObj) {
 
     console.dir(listItemEl); //(from snapcode)
 
-    // add entire list item to list
-
     // JB New code
     // Vanilla JS
     var ul = document.getElementById("tasks-to-do");
@@ -52,8 +54,10 @@ var createTaskEl = function(taskDataObj) {
 
     // tracees old code
     // jquery
-    // tasksToDoEl.appendChild(listItemEl);
+    // tasksToDoEl.appendChild(listItemEl); //undid comment at 4.3.5 //commented again bc of errors:'appendchild' of null
 
+    //increase task counter for next unique id 4.3.5
+    taskIdCounter++;
 };
 
 formEl.addEventListener("submit", taskFormHandler); //on a button click, create a task
