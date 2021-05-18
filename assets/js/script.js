@@ -108,10 +108,40 @@ var createTaskActions = function(taskId) { //4.3.6
     return actionContainerEl;
 }
 var taskButtonHandler = function(event) { //4.3.7
-    console.log(event.target);
+    //task target element from event 4.3.8
+
+    //edit button was clicked 4.3.8
+    if (targetEl.matches(".edit-btn")) {
+        var taskId = targetEl.getAttribute("data-task-id");
+        editTask(taskId);
+    }
+    //delete button was clicked 4.3.8
+    else if (targetEl.matches(".delete-btn")) {
+        var taskId = targetEl.getAttribute("data-task-id");
+        deleteTask(taskId);
+    }
+};
+
+var editTask = function(taskId) { //4.3.8
+    //get task list item element
+    var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
+
+    //get content from task name and type
+    var taskName = taskSelected.querySelector("h3.task-name").textContent;
+
+
+    var taskType = taskSelected.querySelector("span.task-type").textContent;
+    document.querySelector("input[name='task-name']").value = taskName;
+    document.querySelector("select[name='task-type']").value = taskType;
+
+};
+
+var deleteTask = function(taskId) {
+    var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']'");
+    taskSelected.remove();
 };
 
 
 formEl.addEventListener("submit", taskFormHandler); //on a button click, create a task
 
-pageContentEl.addEventListener("click", taskButtonHandler); //4.3.7
+pageContentEl.addEventListener("click", taskButtonHandler); //4.3.7 says Uncaught TypeErros: cannot read property 'addEventListner' of null!!!
