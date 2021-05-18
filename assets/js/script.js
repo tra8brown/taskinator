@@ -2,6 +2,7 @@
 var formEl = document.querySelector("#task-form");
 var tasksToDoEl = document.querySelector("#tasks-to-do");
 var taskIdCounter = 0;
+var pageContentEl = document.querySelector("#page-content"); //4.3.7
 
 var taskFormHandler = function(event) {
     event.preventDefault(); //4.2.5 tells browser to not to refresh/default browser behavior (and keep remainder in text box)
@@ -106,5 +107,11 @@ var createTaskActions = function(taskId) { //4.3.6
 
     return actionContainerEl;
 }
+var taskButtonHandler = function(event) { //4.3.7
+    console.log(event.target);
+};
+
 
 formEl.addEventListener("submit", taskFormHandler); //on a button click, create a task
+
+pageContentEl.addEventListener("click", taskButtonHandler); //4.3.7
