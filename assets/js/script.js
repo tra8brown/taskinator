@@ -21,6 +21,9 @@ var taskFormHandler = function(event) {
     document.querySelector("input[name='task-name']").value = "";
     document.querySelector("select[name='task-type']").selectedIndex = 0;
 
+    var isEdit = formEl.hasAttribute("data-task-id");
+    console.log(isEdit);
+
     //package up data as an object 4.2.7
     var taskDataObj = {
         name: taskNameInput,
@@ -60,7 +63,7 @@ var createTaskEl = function(taskDataObj) {
 
     // tracees old code
     // jquery
-    // tasksToDoEl.appendChild(listItemEl); //undid comment at 4.3.5 //commented again bc of errors:'appendchild' of null
+    tasksToDoEl.appendChild(listItemEl); //undid comment at 4.3.5 //commented again bc of errors:'appendchild' of null
     // tasksToDoEl mentioned again in 4.3.6!!! 
 
     //increase task counter for next unique id 4.3.5
@@ -111,12 +114,12 @@ var taskButtonHandler = function(event) { //4.3.7
     //task target element from event 4.3.8
 
     //edit button was clicked 4.3.8
-    if (targetEl.matches(".edit-btn")) {
+    if (pageContentEl.matches(".edit-btn")) {
         var taskId = targetEl.getAttribute("data-task-id");
         editTask(taskId);
     }
     //delete button was clicked 4.3.8
-    else if (targetEl.matches(".delete-btn")) {
+    else if (pageContentEl.matches(".delete-btn")) {
         var taskId = targetEl.getAttribute("data-task-id");
         deleteTask(taskId);
     }
@@ -133,7 +136,8 @@ var editTask = function(taskId) { //4.3.8
     var taskType = taskSelected.querySelector("span.task-type").textContent;
     document.querySelector("input[name='task-name']").value = taskName;
     document.querySelector("select[name='task-type']").value = taskType;
-
+    document.querySelector("#save-task").textContent = "SaveTask";
+    formEl.setAttribute("data-task-id", taskId);
 };
 
 var deleteTask = function(taskId) {
@@ -144,4 +148,4 @@ var deleteTask = function(taskId) {
 
 formEl.addEventListener("submit", taskFormHandler); //on a button click, create a task
 
-pageContentEl.addEventListener("click", taskButtonHandler); //4.3.7 says Uncaught TypeErros: cannot read property 'addEventListner' of null!!!
+pageContentEl.addEventListener("click", taskButtonHandler);
