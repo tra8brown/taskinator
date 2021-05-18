@@ -93,7 +93,7 @@ var createTaskActions = function(taskId) { //4.3.6
     deleteButtonEl.setAttribute("data-task-id", taskId);
     actionContainerEl.appendChild(deleteButtonEl);
 
-    var statusSelectEl = document.createElement("select"); //4.3.6 (*snapcode is different? 97-100)
+    var statusSelectEl = document.createElement("select"); //4.3.6 
     statusSelectEl.className = "select-status";
     statusSelectEl.setAttribute("name", "status-change");
     statusSelectEl.setAttribute("data-task-id", taskId);
@@ -102,7 +102,7 @@ var createTaskActions = function(taskId) { //4.3.6
     for (var i = 0; i < statusChoices.length; i++) {
         //create option element
         var statusOptionEl = document.createElement("option");
-        statusOptionEl.textContent = statusChoices[i]; //(snapcode 105, 106 is switched?)
+        statusOptionEl.textContent = statusChoices[i];
         statusOptionEl.setAttribute("value", statusChoices[i]);
 
         //append to select 4.3.6
