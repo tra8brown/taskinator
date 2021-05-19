@@ -5,6 +5,7 @@ var taskIdCounter = 0;
 var pageContentEl = document.querySelector("#page-content"); //4.3.7
 var tasksInProgressEl = document.querySelector("#tasks-in-progress"); //4.3.10
 var tasksCompletedEl = document.querySelector("#tasks-completed"); //4.3.10
+var tasks = []; //4.4.4
 
 var taskFormHandler = function(event) {
     event.preventDefault(); //4.2.5 tells browser to not to refresh/default browser behavior (and keep remainder in text box)
@@ -35,7 +36,8 @@ var taskFormHandler = function(event) {
         //package up data as an object 4.2.7
         var taskDataObj = {
             name: taskNameInput,
-            type: taskTypeInput
+            type: taskTypeInput,
+            status: "to do"
         };
         //send it as an argument to createTaskEl
         createTaskEl(taskDataObj);
@@ -57,22 +59,18 @@ var createTaskEl = function(taskDataObj) {
     taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskDataObj.name + "</h3><span class='task-type'>" + taskDataObj.type + "</span>";
     listItemEl.appendChild(taskInfoEl);
 
-    // JB New code 4.2.9
-    // Vanilla JS
-    //var ul = document.getElementById("tasks-to-do");
-    //ul.appendChild(listItemEl);
-
     var taskActionsEl = createTaskActions(taskIdCounter); //4.3.6
     listItemEl.appendChild(taskActionsEl);
     tasksToDoEl.appendChild(listItemEl);
 
-    // tracees old code
-    // jquery
-    //tasksToDoEl.appendChild(listItemEl); //undid comment at 4.3.5 //commented again bc of errors:'appendchild' of null
-    // tasksToDoEl mentioned again in 4.3.6!!! 
+    taskDataObj.id = taskIdCounter;
+
+    tasks.push(tasksDataObj);
 
     //increase task counter for next unique id 4.3.5
     taskIdCounter++;
+    console.log(taskDataObj);
+    console.log(taskDataObj.status);
 };
 
 var createTaskActions = function(taskId) { //4.3.6
